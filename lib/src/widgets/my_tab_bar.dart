@@ -1,13 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-///我也忘记有什么特殊作用
+///可以设置背景色的tabbar
 class MyTabBar extends StatefulWidget implements PreferredSizeWidget{
 
 	MyTabBar({
 		Key key,
 		@required this.tabs,
-		this.controller,
+		@required this.controller,
 		this.isScrollable = false,
 		this.indicatorColor,
 		this.indicatorWeight = 2.0,
@@ -173,6 +173,7 @@ class MyTabBar extends StatefulWidget implements PreferredSizeWidget{
 	/// interfere with the default tap handler.
 	final ValueChanged<int> onTap;
 
+	///背景色
 	final Color backgroundColor;
 
 	TabBar tabBar;

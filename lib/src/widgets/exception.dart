@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../r.dart';
-
-class ServerException extends StatelessWidget {
+class Exception extends StatelessWidget {
 	@override
 	Widget build(BuildContext context) {
 		return Container(
@@ -12,9 +10,8 @@ class ServerException extends StatelessWidget {
 				mainAxisSize: MainAxisSize.min,
 				crossAxisAlignment: CrossAxisAlignment.center,
 				children: <Widget>[
-					SizedBox(height: 80,),
-					Image.asset(R.imagesServerExceptionPng, height: 150,),
-					Text("网络或服务器异常", style: TextStyle(color: Colors.grey[600]),),
+					SizedBox(height: 100,),
+					Icon(Icons.event_busy, size: 150, color: Colors.grey,),
 				],
 			),
 		);

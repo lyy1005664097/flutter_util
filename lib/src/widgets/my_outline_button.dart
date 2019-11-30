@@ -16,17 +16,13 @@ class MyOutlineButton extends StatelessWidget{
 		this.disabledColor,
 		this.radius,
 		this.borderRadius,
-		this.borderColor = const Color(0xFF000000),
+		this.borderColor,
 		this.borderWidth = 1.0,
-		this.borderStyle = BorderStyle.solid,
-		this.icon,
 		this.width,
 		this.height,
 		this.alignment,
-	}): assert(borderColor != null),
-		assert(borderWidth != null),
+	}):assert(borderWidth != null),
 		assert(borderWidth >= 0.0),
-		assert(borderStyle != null),
 		super(key: key,);
 
 	///按钮点击时的回调方法
@@ -34,7 +30,7 @@ class MyOutlineButton extends StatelessWidget{
 	///按钮背景色
 	final Color color;
 	///按钮失效时的背景色
-	final Color disabledColor;
+	Color disabledColor;
 	final Color splashColor;
 	final Color focusColor;
 	final Color hoverColor;
@@ -48,12 +44,9 @@ class MyOutlineButton extends StatelessWidget{
 	///按钮的边框圆角
 	BorderRadius borderRadius;
 	///按钮的边框颜色
-	final Color borderColor;
+	Color borderColor;
 	///按钮的边框线宽
 	final double borderWidth;
-	///按钮边框的线的风格
-	final BorderStyle borderStyle;
-	Icon icon;
 	///按钮的宽度
 	final double width;
 	///按钮的高度
@@ -64,37 +57,33 @@ class MyOutlineButton extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
+	  disabledColor = disabledColor ?? Theme.of(context).disabledColor;
     borderRadius = borderRadius ?? BorderRadius.circular(5);
     ShapeBorder shape = RoundedRectangleBorder(
 	    side: BorderSide(
-		    color: borderColor,
+		    color: borderColor
+				    ?? (enabled
+		          ? Theme.of(context).primaryColor
+		          : disabledColor),
 		    width: borderWidth,
-		    style: borderStyle,
+		    style: BorderStyle.solid,
 	    ),
 	    borderRadius: borderRadius,
     );
 
     return Material(
-	    color: enabled ? color : disabledColor,
+	    color: color,
 	    shape: shape,
 	    child: InkWell(
-		    child: Padding(
+		    child: Container(
 			    padding: padding ?? EdgeInsets.all(5),
-			    child: icon == null
-					    ? Container(
-		            width: width,
-						    height: height,
-						    child: child,
-		            alignment: alignment,
-					    )
-					    : Row(
-		            mainAxisSize: MainAxisSize.min,
-		            mainAxisAlignment: MainAxisAlignment.center,
-		            children: <Widget>[
-		              icon,
-			            child,
-		            ],
-	            ),
+          width: width,
+			    height: height,
+			    child: DefaultTextStyle(
+				    style: TextStyle(color: enabled ? Colors.black : disabledColor),
+				    child: child,
+			    ),
+          alignment: alignment,
 		    ),
 		    onTap: onPressed,
 		    focusColor: focusColor,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'no_data.dart';
+import 'exception.dart';
 import 'waiting.dart';
 
 typedef DataWidgetBuilder<T> = Widget Function(BuildContext context, T data);
@@ -47,14 +47,14 @@ class MyFutureBuilder<T> extends StatelessWidget {
 				if (snapshot.hasData) {
 					if(snapshot.data == null){
 						widget = noDataBuilder == null
-							?  NoData()
+							?  Exception()
 							: noDataBuilder(context);
 					}else{
 						widget = childBuilder(context, snapshot.data);
 					}
 				} else if (snapshot.hasError){
 					widget = errorBuilder == null
-						? Error()
+						? Exception()
 						: errorBuilder(context, snapshot.error);
 				}else{
 					widget = waitingBuilder == null
